@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tes Depresi PHQ-9</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      :root {
+        --green-10: #f9fffc;
+        --green-100: #d1fae5;
+        --green-500: #10b981;
+        --green-600: #059669;
+        --green-900: #064e3b;
+      }
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--green-10);
+      }
+
+      .full-image {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .header-text {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .info-box,
+      .check-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        border: 1px solid var(--green-500);
+        padding: 8px;
+        border-radius: 6px;
+      }
+
+      .bullet-icon {
+        width: 10px;
+        height: 10px;
+        background-color: var(--green-500);
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 6px;
+        margin-right: 10px;
+      }
+
+      .check-icon {
+        color: var(--green-500);
+        font-size: 1.2rem;
+        margin-right: 10px;
+        line-height: 1.5;
+      }
+
+      .btn-green {
+        background-color: var(--green-500);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.5rem;
+        font-weight: 600;
+        width: 100%;
+      }
+
+    
+
+      .note {
+        font-size: 0.875rem;
+        color: #666;
+        text-align: justify;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--green-900);
+        text-align: justify;
+      }
+
+      .underline-heading-title {
+        position: relative;
+        display: inline-block;
+        color: var(--green-600);
+        letter-spacing: 1px;
+        padding-bottom: 6px;
+      }
+
+      .underline-heading-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 60%;
+        background: linear-gradient(to right, var(--green-500) 60px, var(--green-100) 0);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+
+      .float-wa {
+        text-decoration: none;
+        position: fixed;
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 28px;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        transition: transform 0.2s ease, background-color 0.3s ease;
+        overflow: hidden;
+      }
+
+      /* Hover effect */
+      .float-wa:hover {
+        background-color: #1ebe5d;
+        transform: scale(1.1);
+        text-decoration: none;
+      }
+
+      /* Wave effect */
+      .wa-wave {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        animation: waveEffect 1.6s infinite;
+        background-color: rgba(37, 211, 102, 0.4);
+        z-index: -1;
+      }
+
+      @keyframes waveEffect {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        70% {
+          transform: scale(1.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      /* 📱 Responsive adjustments */
+      @media (max-width: 576px) {
+        .info-box,
+        .check-item {
+          flex-direction: row;
+          font-size: 0.95rem;
+        }
+
+        .underline-heading-title {
+          font-size: 1.2rem;
+        }
+
+        p {
+          font-size: 0.95rem;
+        }
+      }
+
+      @media (min-width: 577px) and (max-width: 768px) {
+        .underline-heading-title {
+          font-size: 1.4rem;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .underline-heading-title {
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Gambar Full -->
+    <img src="assets/ChatGPT Image 9 Apr 2025, 00.16.34.png" alt="Ilustrasi" class="img-fluid full-image" />
+
+    <div class="header-text">
+      <h1 class="fw-bold underline-heading-title">Merasa sedih atau murung belakangan ini?</h1>
+
+      <div class="mt-4 mx-auto" style="max-width: 500px">
+        <div class="info-box">
+          <div class="bullet-icon"></div>
+          <p>Depresi adalah rasa sedih & putus asa yang bertahan lama.</p>
+        </div>
+        <div class="info-box">
+          <div class="bullet-icon"></div>
+          <p>Gejala dapat berupa ringan, sedang, atau berat.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-3" style="max-width: 500px">
+      <div class="check-item">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+        <div>
+          <p>Tes ini merupakan alat skrining sederhana namun bermakna, dirancang untuk membantu kamu memahami kondisi kesehatan mentalmu saat ini.</p>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+        <div>
+          <p>Berisi 10 pertanyaan reflektif yang menggunakan skala 0 sampai 4 untuk mengukur tingkat kecemasan, kelelahan mental, stres, dan gejala emosional lainnya.</p>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+        <div>
+          <p>Skor akhir bersifat rahasia dan hanya dapat diketahui olehmu, kecuali kamu memilih untuk membagikannya kepada profesional kesehatan mental atau orang terdekat yang kamu percaya.</p>
+        </div>
+      </div>
+
+      <p class="note mt-3">Tes ini bukan diagnosis medis. Hasilnya dapat membantu kamu memahami kondisi emosionalmu, namun untuk diagnosis dan penanganan lebih lanjut, sebaiknya konsultasikan dengan ahli kesehatan mental profesional.</p>
+
+      <div class="text-center mt-4 mb-4">
+        <a href="quiz.html" class="btn btn-green">Ambil Tes</a>
+      </div>
+    </div>
+
+    <a href="https://wa.me/6283156416534?text=Halo%2C%20saya%20merasa%20membutuhkan%20teman%20bicara.%20Bolehkah%20saya%20bercerita%3F" class="float-wa" target="_blank" title="Konsultasi via WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </body>
+</html>

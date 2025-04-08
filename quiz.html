@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kesadaran Kesehatan Mental - Kuesioner</title>
+    <!-- Reset & Google Fonts -->
+    <link rel="stylesheet" href="reset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- CSS Kustom -->
+    <style>
+      :root {
+        --green-10: #f9fffc; /* Hijau sangat muda */
+        --green-50: #ecfdf5; /* Hijau sangat muda */
+        --green-100: #d1fae5; /* Hijau muda */
+        --green-200: #a7f3d0; /* Hijau terang */
+        --green-300: #6ee7b7; /* Hijau cerah */
+        --green-400: #34d399; /* Hijau standar */
+        --green-500: #10b981; /* Hijau dominan */
+        --green-600: #059669; /* Hijau sedikit gelap */
+        --green-700: #047857; /* Hijau gelap */
+        --green-800: #065f46; /* Hijau sangat gelap */
+        --green-900: #064e3b; /* Hijau ekstragemap */
+      }
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--green-10);
+      }
+      header {
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0px 0.1px 0.7px rgba(0, 0, 0, 0.02), 0px 0.3px 1.7px rgba(0, 0, 0, 0.028), 0px 0.6px 3.3px rgba(0, 0, 0, 0.035), 0px 1.1px 5.8px rgba(0, 0, 0, 0.042), 0px 2.1px 10.9px rgba(0, 0, 0, 0.05),
+          0px 5px 26px rgba(0, 0, 0, 0.07);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      header h1 {
+        display: inline-block;
+        font-size: x-large;
+        margin: 0 20px;
+      }
+      header nav {
+        display: inline-block;
+        float: right;
+        font-size: larger;
+        margin: 15px 20px 5px 20px;
+      }
+      header nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #424652;
+        transition: color 0.1s;
+      }
+      header nav a:hover {
+        color: #5d76c2;
+      }
+      main {
+        max-width: 960px;
+        margin: 30px auto;
+        /* background-color: white; */
+        padding: 20px;
+        /* box-shadow: 0px 0.1px 0.7px rgba(0, 0, 0, 0.008), 0px 0.3px 1.7px rgba(0, 0, 0, 0.012), 0px 0.6px 3.3px rgba(0, 0, 0, 0.015), 0px 1.1px 5.8px rgba(0, 0, 0, 0.018), 0px 2.1px 10.9px rgba(0, 0, 0, 0.022),
+          0px 5px 26px rgba(0, 0, 0, 0.03); */
+      }
+
+      /* Styling container progress bar */
+      .progress-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .progress-left {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+      .progress-bar {
+        flex-grow: 1;
+        height: 20px;
+        background-color: var(--green-100);
+        border-radius: 10px;
+        margin: 0 10px;
+        position: relative;
+      }
+      .progress-fill {
+        background-color: var(--green-600);
+        height: 100%;
+        width: 0%;
+        border-radius: 10px;
+      }
+      .progress-right {
+        font-size: 16px;
+        margin-left: 10px;
+      }
+      /* Judul bagian */
+      .section-title {
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 20px;
+        color: var(--green-900);
+
+        font-weight: 500;
+      }
+      /* Styling untuk tiap pertanyaan */
+      .question-block {
+        margin-bottom: 20px;
+        padding: 24px;
+        background: var(--green-50);
+        border-radius: 5px;
+      }
+      .question-text {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: var(--green-900);
+        font-weight: 500;
+      }
+      .option-label {
+        display: block;
+        padding: 8px 10px;
+        margin: 6px 0;
+        border: 0.5px solid var(--green-200);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.15s;
+      }
+      /* .option-label:hover {
+        background-color: #e0e0e0;
+      } */
+      .option-label input {
+        margin-right: 10px;
+      }
+      /* Tombol Next/Submit */
+      .next-button {
+        display: block;
+        width: 200px;
+        margin: 30px auto;
+        padding: 10px;
+        font-size: 18px;
+        background-color: var(--green-600);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .next-button:hover {
+        background-color: var(--green-800);
+      }
+
+      /* Aturan variasi warna untuk tombol berdasarkan urutan (contoh: jika ada lebih dari satu tombol) */
+      .next-button:nth-child(1) {
+        background-color: #d7e2ff;
+      }
+      .next-button:nth-child(2) {
+        background-color: #ffead6;
+      }
+      .next-button:nth-child(3) {
+        background-color: #c8ffdf;
+      }
+      .next-button:nth-child(4) {
+        background-color: #ffc0c0;
+      }
+      .next-button:nth-child(5) {
+        background-color: #ecd8ff;
+      }
+      .next-button:hover {
+        opacity: 0.8;
+      }
+      /* Container opsi yang menggunakan Flexbox agar opsi diatur secara horizontal */
+      .option-container {
+        display: flex;
+        justify-content: space-around; /* atau gunakan 'space-between' sesuai kebutuhan */
+        flex-wrap: wrap; /* agar opsi menurun jika ruang tidak cukup */
+        margin-top: 16px;
+      }
+
+      /* Label untuk tiap opsi, diatur agar isinya tersusun secara vertikal (column) */
+      .option-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        margin: 10px;
+        border: none;
+      }
+
+      /* Sembunyikan input radio asli */
+      .option-label input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      /* Elemen lingkaran sebagai checkbox custom */
+      .circle {
+        width: 50px;
+        height: 50px;
+        border: 2px solid var(--green-900);
+        border-radius: 50%;
+        box-sizing: border-box;
+        background-color: var(--green-100);
+        transition: border-color 0.2s, box-shadow 0.2s;
+        margin-bottom: 6px;
+      }
+
+      /* Teks opsi ditampilkan di bawah lingkaran */
+      .option-text {
+        font-size: 14px;
+        text-align: center;
+        color: var(--green-900);
+        width: 80px; /* Sesuaikan lebar sesuai kebutuhan */
+      }
+
+      /* Efek hover (opsional) */
+      .option-label:hover .circle {
+        opacity: 0.8;
+      }
+      /* Bagian default, isi masih kosong */
+      .circle::after {
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 28%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: transparent; /* Belum terisi */
+        transition: background-color 0.2s;
+      }
+
+      /* Saat :checked, isi lingkaran menjadi warna tertentu */
+      .option-label input[type='radio']:checked + .circle::after {
+        background-color: var(--green-500); /* atau warna lain */
+      }
+
+      .title {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #424652;
+        margin-top: 30px;
+        font-weight: 700;
+      }
+
+      .underline-heading-title {
+        position: relative;
+        display: inline-block;
+        color: var(--green-600);
+        letter-spacing: 1px;
+        padding-bottom: 6px;
+        text-align: center;
+      }
+
+      .underline-heading-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px; /* Jarak antara teks dan underline */
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 60%;
+        background: linear-gradient(to right, var(--green-500) 60px, var(--green-100) 0);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+
+      .phq-section {
+        margin: 0 auto;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .phq-title {
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 1rem;
+        color: var(--green-800);
+      }
+
+      .phq-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .phq-list li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .phq-icon {
+        background-color: #34d399;
+        color: white;
+        border-radius: 9999px;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 4px;
+        margin-right: 12px;
+      }
+      i.fa-check {
+        font-size: 20px;
+      }
+
+      .phq-text {
+        font-size: 18px;
+        color: var(--green-700);
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <h1 class="underline-heading-title">Tes Kesehatan Mental</h1>
+    </div>
+    <main class="container">
+      <div id="quiz-container"></div>
+      <div id="hasil-container" class="container-fluid px-4 py-4" style="display: none"></div>
+    </main>
+
+    <script>
+      /**************************************************************
+       * Fungsi konstruktor untuk membuat objek pertanyaan.
+       **************************************************************/
+      function Question(pertanyaan, kategoriPertanyaan, opsiJawaban, skorOpsiJawaban) {
+        this.pertanyaan = pertanyaan;
+        this.kategoriPertanyaan = kategoriPertanyaan;
+        this.opsiJawaban = opsiJawaban;
+        this.skorOpsiJawaban = skorOpsiJawaban;
+        this.jawabanPengguna = null; // Belum ada jawaban
+      }
+
+      /**************************************************************
+       * Data pertanyaan, kategori, opsi jawaban, dan skor.
+       **************************************************************/
+      // Daftar kategori untuk masing-masing pertanyaan
+      let kategoriPertanyaan = [
+        'Kecemasan', // Q1
+        'Depresi', // Q2
+        'Depresi', // Q3
+        'Kelelahan', // Q4
+        'Beban', // Q5
+        'Panik', // Q6
+        'Kognisi', // Q7
+        'Depresi', // Q8
+        'Rendah Diri', // Q9
+        'Ketegangan', // Q10
+      ];
+
+      // Daftar pertanyaan (sesuai yang Anda berikan)
+      let pertanyaan = [
+        'Apakah kamu sering merasa cemas atau khawatir secara berlebihan tanpa alasan yang jelas?',
+        'Apakah kamu merasa kehilangan minat atau kesenangan terhadap hal-hal yang biasanya kamu sukai?',
+        'Apakah kamu pernah merasa bahwa hidup ini tidak ada artinya atau berpikir untuk menyakiti diri sendiri?',
+        'Apakah kamu merasa lelah secara fisik maupun mental tanpa penyebab yang jelas?',
+        'Apakah kamu merasa terbebani dengan tanggung jawab yang kamu miliki sekarang?',
+        'Seberapa sering kamu mengalami serangan panik, detak jantung cepat, atau napas pendek?',
+        'Apakah kamu kesulitan untuk berkonsentrasi atau membuat keputusan sederhana?',
+        'Seberapa sering kamu merasa sedih atau tidak bersemangat dalam seminggu terakhir?',
+        'Apakah kamu merasa rendah diri atau merasa tidak berharga dalam beberapa waktu terakhir?',
+        'Apakah kamu merasa sulit untuk rileks atau terus merasa tegang?',
+      ];
+
+      // Opsi jawaban yang digunakan untuk semua pertanyaan
+      let opsiJawaban = [
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+        ['Tidak sama sekali', 'Jarang', 'Kadang-kadang', 'Sering', 'Sangat sering'],
+      ];
+
+      // Skor untuk masing-masing opsi jawaban (untuk 5 pilihan)
+      let skorOpsiJawaban = [
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+        [0, 25, 50, 75, 100],
+      ];
+
+      // Buat array objek pertanyaan
+      let daftarPertanyaan = [];
+      for (let i = 0; i < pertanyaan.length; i++) {
+        let obj = new Question(pertanyaan[i], kategoriPertanyaan[i], opsiJawaban[i], skorOpsiJawaban[i]);
+        daftarPertanyaan.push(obj);
+      }
+
+      /**************************************************************
+       * Variabel untuk mengelola kelompok pertanyaan.
+       * Ditampilkan 5 pertanyaan per kelompok.
+       **************************************************************/
+      let indexKelompokSaatIni = 0;
+      const pertanyaanPerKelompok = 5;
+      const totalKelompok = Math.ceil(daftarPertanyaan.length / pertanyaanPerKelompok);
+
+      /**************************************************************
+       * Fungsi untuk menampilkan progress bar dan judul bagian.
+       **************************************************************/
+      function renderProgressBar() {
+        // Hitung persentase berdasarkan kelompok yang telah selesai.
+        const persen = Math.round((indexKelompokSaatIni / totalKelompok) * 100);
+
+        const container = document.createElement('div');
+        container.className = 'progress-container';
+
+        const kiri = document.createElement('div');
+        kiri.className = 'progress-left';
+        kiri.innerText = persen + '%';
+
+        const barContainer = document.createElement('div');
+        barContainer.className = 'progress-bar';
+        const fill = document.createElement('div');
+        fill.className = 'progress-fill';
+        fill.style.width = persen + '%';
+        barContainer.appendChild(fill);
+
+        const kanan = document.createElement('div');
+        kanan.className = 'progress-right';
+        kanan.innerText = `Bagian ${indexKelompokSaatIni} dari ${totalKelompok}`;
+
+        container.appendChild(kiri);
+        container.appendChild(barContainer);
+        container.appendChild(kanan);
+
+        return container;
+      }
+
+      /**************************************************************
+       * Fungsi untuk menampilkan kelompok pertanyaan (5 per kelompok).
+       **************************************************************/
+      function tampilkanKelompokPertanyaan() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = ''; // Bersihkan kontainer sebelumnya
+
+        // Tampilkan progress bar di atas
+        container.appendChild(renderProgressBar());
+
+        // Tampilkan judul bagian di bawah progress bar
+        const judulBagian = document.createElement('h2');
+        judulBagian.className = 'section-title';
+        judulBagian.innerText = `Bagian ${indexKelompokSaatIni + 1} dari ${totalKelompok}`;
+        container.appendChild(judulBagian);
+
+        // Ambil subset pertanyaan untuk kelompok ini
+        const mulai = indexKelompokSaatIni * pertanyaanPerKelompok;
+        const akhir = Math.min(mulai + pertanyaanPerKelompok, daftarPertanyaan.length);
+        for (let i = mulai; i < akhir; i++) {
+          const q = daftarPertanyaan[i];
+          const blokPertanyaan = document.createElement('div');
+          blokPertanyaan.className = 'question-block';
+
+          const teksPertanyaan = document.createElement('p');
+          teksPertanyaan.className = 'question-text';
+          teksPertanyaan.innerText = `Q${i + 1}: ${q.pertanyaan}`;
+          blokPertanyaan.appendChild(teksPertanyaan);
+
+          // Buat opsi radio untuk masing-masing jawaban
+          // Buat container flex untuk opsi jawaban
+          let answersEl = document.createElement('div');
+          answersEl.className = 'option-container';
+
+          // Loop untuk setiap opsi jawaban
+          q.opsiJawaban.forEach((opsi, idxOpsi) => {
+            const label = document.createElement('label');
+            label.className = 'option-label';
+
+            // Buat input radio (disembunyikan melalui CSS)
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'pertanyaan' + i; // Grup nama untuk pertanyaan ini
+            radio.value = idxOpsi;
+            if (q.jawabanPengguna !== null && q.jawabanPengguna == idxOpsi) {
+              radio.checked = true;
+            }
+            label.appendChild(radio);
+
+            // Buat elemen lingkaran (custom checkbox kosong)
+            const circle = document.createElement('span');
+            circle.className = 'circle';
+            label.appendChild(circle);
+
+            // Buat elemen teks untuk opsi, ditampilkan di bawah lingkaran
+            const textOption = document.createElement('span');
+            textOption.className = 'option-text';
+            textOption.innerText = opsi;
+            label.appendChild(textOption);
+
+            // Tambahkan label ke dalam container opsi
+            answersEl.appendChild(label);
+          });
+
+          // Tambahkan container opsi ke blok pertanyaan
+          blokPertanyaan.appendChild(answersEl);
+
+          container.appendChild(blokPertanyaan);
+        }
+
+        // Tombol Next / Submit
+        const tombolNext = document.createElement('button');
+        tombolNext.className = 'next-button';
+        tombolNext.innerText = indexKelompokSaatIni < totalKelompok - 1 ? 'Next' : 'Submit';
+        tombolNext.addEventListener('click', pindahKeKelompokBerikut);
+        container.appendChild(tombolNext);
+      }
+
+      /**************************************************************
+       * Fungsi untuk memeriksa jawaban di kelompok saat ini dan
+       * pindah ke kelompok berikutnya atau menampilkan hasil akhir.
+       **************************************************************/
+      function pindahKeKelompokBerikut() {
+        // Validasi: pastikan semua pertanyaan di kelompok ini telah dijawab.
+        const mulai = indexKelompokSaatIni * pertanyaanPerKelompok;
+        const akhir = Math.min(mulai + pertanyaanPerKelompok, daftarPertanyaan.length);
+        for (let i = mulai; i < akhir; i++) {
+          const radios = document.getElementsByName('pertanyaan' + i);
+          let sudahJawab = false;
+          for (const radio of radios) {
+            if (radio.checked) {
+              sudahJawab = true;
+              // Simpan jawaban ke objek pertanyaan
+              daftarPertanyaan[i].jawabanPengguna = radio.value;
+              break;
+            }
+          }
+          if (!sudahJawab) {
+            alert('Harap jawab semua pertanyaan pada kelompok ini.');
+            return;
+          }
+        }
+        // Jika validasi berhasil, lanjutkan
+        if (indexKelompokSaatIni < totalKelompok - 1) {
+          indexKelompokSaatIni++;
+          scrollToTop();
+          tampilkanKelompokPertanyaan();
+        } else {
+          // Jika kelompok terakhir, hitung dan tampilkan hasil
+          scrollToTop();
+
+          hitungHasil();
+        }
+      }
+
+      /**************************************************************
+       * Fungsi untuk menghitung skor akhir dan menampilkan hasil.
+       **************************************************************/
+      function hitungHasil() {
+        // Ambil kategori unik dan inisialisasi total skor per kategori.
+        const kategoriUnik = [];
+        const totalSkor = [];
+        daftarPertanyaan.forEach((q) => {
+          if (!kategoriUnik.includes(q.kategoriPertanyaan)) {
+            kategoriUnik.push(q.kategoriPertanyaan);
+            totalSkor.push(0);
+          }
+        });
+
+        // Akumulasi skor berdasarkan jawaban pengguna.
+        daftarPertanyaan.forEach((q) => {
+          if (q.jawabanPengguna !== null) {
+            const indeks = kategoriUnik.indexOf(q.kategoriPertanyaan);
+            totalSkor[indeks] += q.skorOpsiJawaban[q.jawabanPengguna];
+          }
+        });
+
+        tampilkanHasil(kategoriUnik, totalSkor);
+      }
+
+      /**************************************************************
+       * Fungsi untuk menampilkan hasil (menggunakan Chart.js).
+       **************************************************************/
+      function tampilkanHasil(kategori, skor) {
+        const quizDiv = document.getElementById('quiz-container');
+        const hasilDiv = document.getElementById('hasil-container');
+
+        // Sembunyikan quiz, tampilkan hasil
+        quizDiv.style.display = 'none';
+        hasilDiv.style.display = 'block';
+        hasilDiv.innerHTML = ''; // Kosongkan hasil jika sudah pernah ditampilkan
+
+        const judul = document.createElement('h1');
+        judul.innerText = 'Hasil Tes';
+        hasilDiv.appendChild(judul);
+
+        const canvas = document.createElement('canvas');
+        hasilDiv.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: kategori,
+            datasets: [
+              {
+                label: 'Skor',
+                data: skor,
+                backgroundColor: '#059669',
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                title: { display: true, text: '% dari Skor Maksimum' },
+              },
+            },
+          },
+        });
+
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'mt-5 py-3';
+        infoContainer.style.maxWidth = 'auto';
+        infoContainer.innerHTML = `
+   <div class="phq-section">
+  <h2 class="phq-title">Tes depresi dengan Patient Health Questionnaire-9:</h2>
+  <ul class="phq-list">
+    <li>
+      <span class="phq-icon"><i class="fa-solid fa-check"></i></span>
+      <p class="phq-text">"Terima kasih sudah berani mengenali perasaanmu. Itu bukan hal mudah, tapi kamu melakukannya. Semoga hatimu merasa lebih ringan hari ini."
+</p>
+    </li>
+    <li>
+      <span class="phq-icon"><i class="fa-solid fa-check"></i></span>
+      <p class="phq-text">"Kamu nggak harus kuat setiap saat. Istirahat itu bukan tanda lemah—itu bentuk sayang pada diri sendiri."
+</p>
+    </li>
+    <li>
+      <span class="phq-icon"><i class="fa-solid fa-check"></i></span>
+      <p class="phq-text">"Sekalipun langkahmu terasa kecil, itu tetap langkah maju. Kamu sedang berproses, dan itu sudah sangat berarti."</p>
+    </li>
+  </ul>
+</div>
+
+ <p class="fw-bold mb-2 text-green-800" style="font-size: 18px;">Butuh teman cerita atau tempat curhat?</p>
+  <p class="mb-3" style="font-size: 16px; color: var(--green-700);">
+    Jika kamu merasa butuh seseorang untuk mendengarkan atau ingin berkonsultasi lebih lanjut mengenai perasaanmu, kamu bisa menghubungi aku langsung.<br />
+    Aku di sini untuk mendengarkan—tanpa menghakimi.
+  </p>
+  <a href="https://wa.me/6283156416534?text=Halo%2C%20saya%20merasa%20membutuhkan%20teman%20bicara.%20Bolehkah%20saya%20bercerita%3F" 
+     class="btn btn-success px-4 py-4" target="_blank" style="font-weight: 500; border-radius: 8px;">
+    Hubungi: +62 831-5641-6534
+  </a>
+
+  `;
+        hasilDiv.appendChild(infoContainer);
+      }
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // Efek scroll yang halus
+        });
+      }
+      // Tampilkan kelompok pertanyaan pertama ketika DOM siap.
+      document.addEventListener('DOMContentLoaded', tampilkanKelompokPertanyaan);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js" integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+" crossorigin="anonymous"></script>
+  </body>
+</html>
