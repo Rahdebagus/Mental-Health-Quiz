@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tes Depresi PHQ-9</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
       :root {
         --green-10: #f9fffc;
@@ -70,8 +71,6 @@
         font-weight: 600;
         width: 100%;
       }
-
-    
 
       .note {
         font-size: 0.875rem;
@@ -195,7 +194,7 @@
     <!-- Gambar Full -->
     <img src="assets/ChatGPT Image 9 Apr 2025, 00.16.34.png" alt="Ilustrasi" class="img-fluid full-image" />
 
-    <div class="header-text">
+    <div class="header-text" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out">
       <h1 class="fw-bold underline-heading-title">Merasa sedih atau murung belakangan ini?</h1>
 
       <div class="mt-4 mx-auto" style="max-width: 500px">
@@ -211,28 +210,44 @@
     </div>
 
     <div class="container py-3" style="max-width: 500px">
-      <div class="check-item">
+      <div class="check-item"   data-aos="fade-up"
+      data-aos-offset="100"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div>
           <p>Tes ini merupakan alat skrining sederhana namun bermakna, dirancang untuk membantu kamu memahami kondisi kesehatan mentalmu saat ini.</p>
         </div>
       </div>
 
-      <div class="check-item">
+      <div class="check-item"   data-aos="fade-up"
+      data-aos-offset="100"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div>
           <p>Berisi 10 pertanyaan reflektif yang menggunakan skala 0 sampai 4 untuk mengukur tingkat kecemasan, kelelahan mental, stres, dan gejala emosional lainnya.</p>
         </div>
       </div>
 
-      <div class="check-item">
+      <div class="check-item"  data-aos="fade-up"
+      data-aos-offset="100"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div>
           <p>Skor akhir bersifat rahasia dan hanya dapat diketahui olehmu, kecuali kamu memilih untuk membagikannya kepada profesional kesehatan mental atau orang terdekat yang kamu percaya.</p>
         </div>
       </div>
-
-      <p class="note mt-3">Tes ini bukan diagnosis medis. Hasilnya dapat membantu kamu memahami kondisi emosionalmu, namun untuk diagnosis dan penanganan lebih lanjut, sebaiknya konsultasikan dengan ahli kesehatan mental profesional.</p>
+    
+      <p data-aos="fade-up"
+      data-aos-offset="100"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"  class="note mt-3">Tes ini bukan diagnosis medis. Hasilnya dapat membantu kamu memahami kondisi emosionalmu, namun untuk diagnosis dan penanganan lebih lanjut, sebaiknya konsultasikan dengan ahli kesehatan mental profesional.</p>
 
       <div class="text-center mt-4 mb-4">
         <a href="quiz.html" class="btn btn-green">Ambil Tes</a>
@@ -243,4 +258,8 @@
       <i class="fab fa-whatsapp"></i>
     </a>
   </body>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </html>

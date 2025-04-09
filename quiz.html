@@ -455,7 +455,7 @@
   </head>
   <body>
     <div class="title">
-      <h1 class="underline-heading-title">Tes Kesehatan Mental</h1>
+      <h1 id="title-main" class="underline-heading-title">Tes Kesehatan Mental</h1>
     </div>
     <main class="container" style="height: 100vh">
       <div class="container" id="quiz-container"></div>
@@ -732,9 +732,11 @@
         hasilDiv.style.display = 'block';
         hasilDiv.innerHTML = ''; // Kosongkan hasil jika sudah pernah ditampilkan
 
-        const judul = document.createElement('h1');
-        judul.innerText = 'Hasil Tes';
-        hasilDiv.appendChild(judul);
+        // const judul = document.createElement('h1');
+        const titleMain= document.getElementById('title-main');
+        titleMain.innerText = 'Hasil Tes Kesehatan Mental';
+        // judul.innerText = 'Hasil Tes';
+        // hasilDiv.appendChild(judul);
 
         const canvas = document.createElement('canvas');
         hasilDiv.appendChild(canvas);
@@ -767,37 +769,50 @@
         infoContainer.className = 'mt-5 py-3';
         infoContainer.style.maxWidth = 'auto';
         infoContainer.innerHTML = `
-   <div class="phq-section">
-  <h2 class="phq-title">Tes depresi dengan Patient Health Questionnaire-9:</h2>
-  <ul class="phq-list">
-    <li>
+ <div class="phq-section" style="text-align: justify; line-height: 1.6; ">
+  <ul class="phq-list" style="list-style-type: none; padding-left: 0;">
+    <li style="margin-bottom: 1rem; border: 2px solid var(--green-500); padding: 10px;">
       <span class="phq-icon"><i class="fa-solid fa-check"></i></span>
-      <p class="phq-text">"Terima kasih sudah berani mengenali perasaanmu. Itu bukan hal mudah, tapi kamu melakukannya. Semoga hatimu merasa lebih ringan hari ini."
-</p>
+      <p class="phq-text" style="text-align: justify;">
+        "Terima kasih sudah berani mengenali perasaanmu. Itu bukan hal mudah, tapi kamu melakukannya. Semoga hatimu merasa lebih ringan hari ini."
+      </p>
     </li>
-    <li>
+    <li style="margin-bottom: 1rem; border: 2px solid var(--green-500); padding: 10px;">
       <span class="phq-icon"><i class="fa-solid fa-check"></i></span>
-      <p class="phq-text">"Kamu nggak harus kuat setiap saat. Istirahat itu bukan tanda lemah—itu bentuk sayang pada diri sendiri."
-</p>
+      <p class="phq-text" style="text-align: justify;">
+        "Kamu nggak harus kuat setiap saat. Istirahat itu bukan tanda lemah—itu bentuk sayang pada diri sendiri."
+      </p>
     </li>
-    <li>
+    <li style="margin-bottom: 1rem; border: 2px solid var(--green-500); padding: 10px;">
       <span class="phq-icon"><i class="fa-solid fa-check"></i></span>
-      <p class="phq-text">"Sekalipun langkahmu terasa kecil, itu tetap langkah maju. Kamu sedang berproses, dan itu sudah sangat berarti."</p>
+      <p class="phq-text" style="text-align: justify;">
+        "Sekalipun langkahmu terasa kecil, itu tetap langkah maju. Kamu sedang berproses, dan itu sudah sangat berarti."
+      </p>
     </li>
   </ul>
 </div>
 
- <p class="fw-bold mb-2 text-green-800" style="font-size: 18px;">Butuh teman cerita atau tempat curhat?</p>
-  <p class="mb-3" style="font-size: 16px; color: var(--green-700);">
-    Jika kamu merasa butuh seseorang untuk mendengarkan atau ingin berkonsultasi lebih lanjut mengenai perasaanmu, kamu bisa menghubungi aku langsung.<br />
-    Aku di sini untuk mendengarkan—tanpa menghakimi.
-  </p>
-  <a href="https://wa.me/6283156416534?text=Halo%2C%20saya%20merasa%20membutuhkan%20teman%20bicara.%20Bolehkah%20saya%20bercerita%3F" 
-     class="btn btn-success px-4 py-4" target="_blank" style="font-weight: 500; border-radius: 8px;">
-    Hubungi: +62 831-5641-6534
-  </a>
+<p class="fw-bold mb-2 text-green-800" style="font-size: 18px; text-align: justify; border: 2px solid var(--green-500); padding: 10px;">
+  Butuh teman cerita atau tempat curhat?
+</p>
+<p class="mb-3" style="font-size: 16px; color: var(--green-700); text-align: justify; border: 2px solid var(--green-500); padding: 10px;">
+  Jika kamu merasa butuh seseorang untuk mendengarkan atau ingin berkonsultasi lebih lanjut mengenai perasaanmu, kamu bisa menghubungi aku langsung.<br />
+  Aku di sini untuk mendengarkan—tanpa menghakimi.
+</p>
+<a
+  href="https://wa.me/6283156416534?text=Halo%2C%20saya%20merasa%20membutuhkan%20teman%20bicara.%20Bolehkah%20saya%20bercerita%3F"
+  class="btn btn-success px-4 py-4 d-flex justify-content-center align-items-center"
+  target="_blank"
+  style="font-weight: 300; border-radius: 8px;"
+>
+  Hubungi: +62 831-5641-6534
+</a>
 
-  `;
+<!-- Teks "Terima Kasih" di paling bawah -->
+<p style="text-align: center; font-weight: bold; margin-top: 20px; font-size: 18px;">Terima Kasih</p>
+
+`;
+
         hasilDiv.appendChild(infoContainer);
       }
 
