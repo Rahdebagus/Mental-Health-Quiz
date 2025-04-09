@@ -312,14 +312,14 @@
   }
 
   /* Supaya jarak antar-pertanyaan tidak terlalu mepet dan konten nyaman dibaca di layar kecil */
-  .question-block {
-    margin-bottom: 62px;
-  }
+.question-block {
+  margin-bottom: 120px;
+}
 
   /* Buat tombol menempel di bawah layar dengan posisi fixed dan margin di kanan-kiri */
   .next-button {
     position: fixed;
-    bottom: 10px;
+    bottom: 0; /* Tempatkan di bagian bawah layar */
     left: 10px;   /* Margin kiri */
     right: 10px;  /* Margin kanan */
     /* width: 100%;  -> dihapus agar tombol mengikuti left dan right */
@@ -328,6 +328,17 @@
     border-radius: 0; /* Jika ingin sudut tombol tidak melengkung */
     z-index: 9999; /* Pastikan tombol ada di atas elemen lain */
   }
+
+  
+  main {
+    display: flex;
+    flex-direction: column; /* Susun anak secara vertikal */
+    position: relative;
+    height: 100vh;          /* Pakai height penuh layar */
+    margin: 0;
+    padding: 0;
+  }
+
 }
 
     </style>
