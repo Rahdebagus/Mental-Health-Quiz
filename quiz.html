@@ -33,43 +33,22 @@
         margin: 0;
         padding: 0;
         background-color: var(--green-10);
+        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
-      header {
-        background-color: white;
-        padding: 20px;
-        box-shadow: 0px 0.1px 0.7px rgba(0, 0, 0, 0.02), 0px 0.3px 1.7px rgba(0, 0, 0, 0.028), 0px 0.6px 3.3px rgba(0, 0, 0, 0.035), 0px 1.1px 5.8px rgba(0, 0, 0, 0.042), 0px 2.1px 10.9px rgba(0, 0, 0, 0.05),
-          0px 5px 26px rgba(0, 0, 0, 0.07);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-      header h1 {
-        display: inline-block;
-        font-size: x-large;
-        margin: 0 20px;
-      }
-      header nav {
-        display: inline-block;
-        float: right;
-        font-size: larger;
-        margin: 15px 20px 5px 20px;
-      }
-      header nav a {
-        margin: 0 10px;
-        text-decoration: none;
-        color: #424652;
-        transition: color 0.1s;
-      }
-      header nav a:hover {
-        color: #5d76c2;
-      }
+
       main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         max-width: 960px;
-        margin: 30px auto;
-        /* background-color: white; */
+        margin: 0 auto;
         padding: 20px;
-        /* box-shadow: 0px 0.1px 0.7px rgba(0, 0, 0, 0.008), 0px 0.3px 1.7px rgba(0, 0, 0, 0.012), 0px 0.6px 3.3px rgba(0, 0, 0, 0.015), 0px 1.1px 5.8px rgba(0, 0, 0, 0.018), 0px 2.1px 10.9px rgba(0, 0, 0, 0.022),
-          0px 5px 26px rgba(0, 0, 0, 0.03); */
+        box-shadow: 0px 0.1px 0.7px rgba(0, 0, 0, 0.008), 0px 0.3px 1.7px rgba(0, 0, 0, 0.012), 0px 0.6px 3.3px rgba(0, 0, 0, 0.015), 0px 1.1px 5.8px rgba(0, 0, 0, 0.018), 0px 2.1px 10.9px rgba(0, 0, 0, 0.022),
+          0px 5px 26px rgba(0, 0, 0, 0.03);
       }
 
       /* Styling container progress bar */
@@ -141,7 +120,7 @@
       /* Tombol Next/Submit */
       .next-button {
         display: block;
-        width: 200px;
+        width: 100%;
         margin: 30px auto;
         padding: 10px;
         font-size: 18px;
@@ -322,13 +301,42 @@
         color: var(--green-700);
         line-height: 1.4;
       }
+
+      /* Tambahkan media query untuk mendeteksi mobile (maksimal 768px, silakan sesuaikan) */
+      @media (max-width: 768px) {
+  /* Pastikan main memenuhi tinggi layar, lalu beri padding bottom untuk space tombol. */
+  main {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 80px; /* Ruang di bawah untuk tombol */
+  }
+
+  /* Supaya jarak antar-pertanyaan tidak terlalu mepet dan konten nyaman dibaca di layar kecil */
+  .question-block {
+    margin-bottom: 62px;
+  }
+
+  /* Buat tombol menempel di bawah layar dengan posisi fixed dan margin di kanan-kiri */
+  .next-button {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;   /* Margin kiri */
+    right: 10px;  /* Margin kanan */
+    /* width: 100%;  -> dihapus agar tombol mengikuti left dan right */
+    padding: 14px 0;
+    font-size: 16px;
+    border-radius: 0; /* Jika ingin sudut tombol tidak melengkung */
+    z-index: 9999; /* Pastikan tombol ada di atas elemen lain */
+  }
+}
+
     </style>
   </head>
   <body>
     <div class="title">
       <h1 class="underline-heading-title">Tes Kesehatan Mental</h1>
     </div>
-    <main class="container">
+    <main class="container-fluid" style="height: 100vh">
       <div id="quiz-container"></div>
       <div id="hasil-container" class="container-fluid px-4 py-4" style="display: none"></div>
     </main>
