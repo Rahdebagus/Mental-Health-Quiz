@@ -6,6 +6,8 @@
     <!-- Reset & Google Fonts -->
     <link rel="stylesheet" href="reset.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <!-- Chart.js -->
@@ -302,54 +304,162 @@
         line-height: 1.4;
       }
 
-      /* Tambahkan media query untuk mendeteksi mobile (maksimal 768px, silakan sesuaikan) */
+      /* Media query untuk layar berlebar maksimal 768px */
       @media (max-width: 768px) {
-  /* Pastikan main memenuhi tinggi layar, lalu beri padding bottom untuk space tombol. */
-  main {
-    position: relative;
-    min-height: 100vh;
-    padding-bottom: 80px; /* Ruang di bawah untuk tombol */
-  }
+        /* Reset margin/padding dan atur tinggi untuk html/body */
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+        }
 
-  /* Supaya jarak antar-pertanyaan tidak terlalu mepet dan konten nyaman dibaca di layar kecil */
-.question-block {
-  margin-bottom: 120px;
-}
+        /* Atur main sebagai flex container dan pastikan memenuhi layar */
+        main {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          position: relative;
+          height: 100vh;
+        }
 
-  /* Buat tombol menempel di bawah layar dengan posisi fixed dan margin di kanan-kiri */
-  .next-button {
-    position: fixed;
-    bottom: 0; /* Tempatkan di bagian bawah layar */
-    left: 10px;   /* Margin kiri */
-    right: 10px;  /* Margin kanan */
-    /* width: 100%;  -> dihapus agar tombol mengikuti left dan right */
-    padding: 14px 0;
-    font-size: 16px;
-    border-radius: 0; /* Jika ingin sudut tombol tidak melengkung */
-    z-index: 9999; /* Pastikan tombol ada di atas elemen lain */
-  }
+        /* Jarak antar blok pertanyaan */
+        .question-block {
+          margin-bottom: 20px;
+          padding: 10px;
+          background: var(--green-50);
+          border-radius: 5px;
+        }
 
-  
-  main {
-    display: flex;
-    flex-direction: column; /* Susun anak secara vertikal */
-    position: relative;
-    height: 100vh;          /* Pakai height penuh layar */
-    margin: 0;
-    padding: 0;
-  }
+        /* Styling teks pertanyaan */
+        .question-text {
+          font-size: 12px;
+          margin-bottom: 10px;
+          color: var(--green-900);
+          font-weight: 500;
+        }
 
-}
+        /* Container opsi agar tersusun horizontal tanpa wrap & tidak melebar keluar */
+        .option-container {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap; /* Tetap satu baris */
+          justify-content: space-between;
+          width: 100%; /* Pastikan lebarnya penuh */
+          overflow: hidden; /* Potong kelebihan (opsional) */
+          box-sizing: border-box; /* Pastikan padding dihitung dalam lebar */
+        }
 
+        /* Setiap opsi agar menempati bagian yang sama besar */
+        .option-label {
+          flex: 1 1 20%; /* Untuk 5 opsi, masing-masing ~20% */
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          cursor: pointer;
+          position: relative;
+          border: none;
+          margin: 0; /* Hilangkan margin horizontal */
+          box-sizing: border-box;
+          padding: 4px; /* Sedikit padding agar tidak berdempetan */
+        }
+
+        /* Lingkaran (custom radio) lebih kecil agar muat di layar sempit */
+        .circle {
+          width: 24px;
+          height: 24px;
+          border: 2px solid var(--green-900);
+          border-radius: 50%;
+          background-color: var(--green-100);
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .option-text {
+          font-size: 11px; /* Kecilkan lagi, jika perlu */
+          text-align: center;
+          color: var(--green-900);
+          margin-top: 4px; /* Jarak sedikit dari lingkaran */
+          width: auto; /* Biarkan teks menyesuaikan (tidak fixed) */
+        }
+
+        /* Bagian default, isi lingkaran kosong */
+        .circle::after {
+          content: '';
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 16px;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          background-color: transparent; /* Belum terisi */
+          transition: background-color 0.2s;
+        }
+
+        /* Saat radio :checked, isi lingkaran */
+        .option-label input[type='radio']:checked + .circle::after {
+          background-color: var(--green-500);
+        }
+
+        /* Tombol Next/Submit di bagian bawah (fixed) */
+        .next-button {
+          position: fixed;
+          bottom: 0;
+          left: 10px;
+          right: 10px;
+          padding: 14px 0;
+          font-size: 16px;
+          border-radius: 8px;
+          z-index: 9999;
+        }
+
+        /* Judul bagian */
+        .section-title {
+          text-align: center;
+          font-size: 18px;
+          margin-bottom: 20px;
+          color: var(--green-900);
+          font-weight: 500;
+        }
+
+        .progress-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .progress-left {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+      .progress-bar {
+        flex-grow: 1;
+        height: 10px;
+        background-color: var(--green-100);
+        border-radius: 10px;
+        margin: 0 10px;
+        position: relative;
+      }
+      .progress-fill {
+        background-color: var(--green-600);
+        height: 100%;
+        width: 0%;
+        border-radius: 10px;
+      }
+      .progress-right {
+        font-size: 16px;
+        margin-left: 10px;
+      }
+      }
     </style>
   </head>
   <body>
     <div class="title">
       <h1 class="underline-heading-title">Tes Kesehatan Mental</h1>
     </div>
-    <main class="container-fluid" style="height: 100vh">
-      <div id="quiz-container"></div>
-      <div id="hasil-container" class="container-fluid px-4 py-4" style="display: none"></div>
+    <main class="container" style="height: 100vh">
+      <div class="container" id="quiz-container"></div>
+      <div id="hasil-container" class="container px-4 py-4" style="display: none"></div>
     </main>
 
     <script>
@@ -461,7 +571,7 @@
 
         const kanan = document.createElement('div');
         kanan.className = 'progress-right';
-        kanan.innerText = `Bagian ${indexKelompokSaatIni} dari ${totalKelompok}`;
+        // kanan.innerText = `Bagian ${indexKelompokSaatIni} dari ${totalKelompok}`;
 
         container.appendChild(kiri);
         container.appendChild(barContainer);
