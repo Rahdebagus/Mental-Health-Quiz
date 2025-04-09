@@ -306,7 +306,7 @@
 
       /* Media query untuk layar berlebar maksimal 768px */
       @media (max-width: 768px) {
-        /* Reset margin/padding dan atur tinggi untuk html/body */
+        /* Reset margin/padding untuk html/body */
         html,
         body {
           margin: 0;
@@ -314,7 +314,7 @@
           height: 100%;
         }
 
-        /* Atur main sebagai flex container dan pastikan memenuhi layar */
+        /* Atur main agar memenuhi layar dan menjadi flex container */
         main {
           display: flex;
           flex-direction: column;
@@ -323,7 +323,7 @@
           height: 100vh;
         }
 
-        /* Jarak antar blok pertanyaan */
+        /* Blok pertanyaan */
         .question-block {
           margin-bottom: 20px;
           padding: 10px;
@@ -331,7 +331,7 @@
           border-radius: 5px;
         }
 
-        /* Styling teks pertanyaan */
+        /* Teks pertanyaan */
         .question-text {
           font-size: 12px;
           margin-bottom: 10px;
@@ -339,32 +339,31 @@
           font-weight: 500;
         }
 
-        /* Container opsi agar tersusun horizontal tanpa wrap & tidak melebar keluar */
+        /* Container opsi */
         .option-container {
           display: flex;
           flex-direction: row;
-          flex-wrap: nowrap; /* Tetap satu baris */
+          flex-wrap: nowrap;
           justify-content: space-between;
-          width: 100%; /* Pastikan lebarnya penuh */
-          overflow: hidden; /* Potong kelebihan (opsional) */
-          box-sizing: border-box; /* Pastikan padding dihitung dalam lebar */
+          width: 100%;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
-        /* Setiap opsi agar menempati bagian yang sama besar */
+        /* Setiap opsi */
         .option-label {
-          flex: 1 1 20%; /* Untuk 5 opsi, masing-masing ~20% */
+          flex: 1 1 20%;
           display: flex;
           flex-direction: column;
           align-items: center;
           cursor: pointer;
           position: relative;
           border: none;
-          margin: 0; /* Hilangkan margin horizontal */
+          margin: 0;
           box-sizing: border-box;
-          padding: 4px; /* Sedikit padding agar tidak berdempetan */
+          padding: 4px;
         }
 
-        /* Lingkaran (custom radio) lebih kecil agar muat di layar sempit */
         .circle {
           width: 24px;
           height: 24px;
@@ -375,14 +374,13 @@
         }
 
         .option-text {
-          font-size: 11px; /* Kecilkan lagi, jika perlu */
+          font-size: 11px;
           text-align: center;
           color: var(--green-900);
-          margin-top: 4px; /* Jarak sedikit dari lingkaran */
-          width: auto; /* Biarkan teks menyesuaikan (tidak fixed) */
+          margin-top: 4px;
+          width: auto;
         }
 
-        /* Bagian default, isi lingkaran kosong */
         .circle::after {
           content: '';
           position: absolute;
@@ -392,25 +390,26 @@
           left: 50%;
           transform: translate(-50%, -50%);
           border-radius: 50%;
-          background-color: transparent; /* Belum terisi */
+          background-color: transparent;
           transition: background-color 0.2s;
         }
 
-        /* Saat radio :checked, isi lingkaran */
         .option-label input[type='radio']:checked + .circle::after {
           background-color: var(--green-500);
         }
 
-        /* Tombol Next/Submit di bagian bawah (fixed) */
+        /* Tombol Next/Submit (pastikan ditempatkan di luar kontainer scrollable jika memungkinkan) */
         .next-button {
-          position: fixed;
-          bottom: 0;
-          left: 10px;
-          right: 10px;
-          padding: 14px 0;
-          font-size: 16px;
-          border-radius: 8px;
-          z-index: 9999;
+          display: block;
+          width: 100%;
+          margin: 30px auto;
+          padding: 10px;
+          font-size: 18px;
+          background-color: var(--green-600);
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
         }
 
         /* Judul bagian */
@@ -422,34 +421,35 @@
           font-weight: 500;
         }
 
+        /* Progress bar */
         .progress-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .progress-left {
-        font-size: 16px;
-        margin-right: 10px;
-      }
-      .progress-bar {
-        flex-grow: 1;
-        height: 10px;
-        background-color: var(--green-100);
-        border-radius: 10px;
-        margin: 0 10px;
-        position: relative;
-      }
-      .progress-fill {
-        background-color: var(--green-600);
-        height: 100%;
-        width: 0%;
-        border-radius: 10px;
-      }
-      .progress-right {
-        font-size: 16px;
-        margin-left: 10px;
-      }
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        .progress-left {
+          font-size: 16px;
+          margin-right: 10px;
+        }
+        .progress-bar {
+          flex-grow: 1;
+          height: 10px;
+          background-color: var(--green-100);
+          border-radius: 10px;
+          margin: 0 10px;
+          position: relative;
+        }
+        .progress-fill {
+          background-color: var(--green-600);
+          height: 100%;
+          width: 0%;
+          border-radius: 10px;
+        }
+        .progress-right {
+          font-size: 16px;
+          margin-left: 10px;
+        }
       }
     </style>
   </head>
@@ -459,7 +459,7 @@
     </div>
     <main class="container" style="height: 100vh">
       <div class="container" id="quiz-container"></div>
-      <div id="hasil-container" class="container px-4 py-4" style="display: none"></div>
+      <div id="hasil-container" class="container" style="display: none"></div>
     </main>
 
     <script>
